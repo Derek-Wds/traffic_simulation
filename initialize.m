@@ -2,10 +2,13 @@ addpath('utils')
 
 global dmin dmax v0 vmax;
 global I J;
+global blockmax;
 global centern radiusn;
 global centerz radiusz;
 global centerw radiusw;
- 
+global lc_nloop fc_nloop lc_zloop fc_zloop lc_wloop fc_wloop;
+global nc;
+
 I = 22;                         %number of avenues (must be even)
 J = 22;                         %number of streets (must be even)
 centern = 11;                   %center for inner loop
@@ -17,7 +20,7 @@ radiusw = 9;                    %radius for outter loop
 pcreate = 0.3;                  %creation rate per block per unit time
 pbreakdown = 0.01 ;             %breakdown rate per car per unit time
 pfix = 0.1;                     %repair rate per broken car per unit time
-dt = .1  ;                      %time step duration
+dt = .05;                      %time step duration
 dmin = .05;                     %distance below which v=0    (in units of blocks)
 dmax = .5;                      %distance above which v=vmax (in units of blocks)
 vmax = 1;                       %maximum speed of cars (since the unit of time 
@@ -40,6 +43,7 @@ xdmax = I;
 jdmin = 2;
 jdmax = J-1;
 
+% initial arrays
 fc = zeros(I,J,2);
 lc = zeros(I,J,2);
 L = zeros(I,J,2);
@@ -51,12 +55,36 @@ yd = zeros(1,numcarsmax);
 onroad = zeros(1,numcarsmax);
 broken = zeros(1,numcarsmax);
 
+% deal with cars on the loop
+blockmax = 16;                  % must be multiple of 4
+fc_nloop = zeros(1, blockmax);
+lc_nloop = zeros(1, blockmax);
+fc_zloop = zeros(1, blockmax);
+lc_zloop = zeros(1, blockmax);
+fc_wloop = zeros(1, blockmax);
+lc_wloop = zeros(1, blockmax);
+on_nloop = zeros(1, numcarsmax);
+on_zloop = zeros(1, numcarsmax);
+on_wloop = zeros(1, numcarsmax);
 
-
+% plot the grid
 xpl = [1 I];
 XPL = (1:I)'*[1 1];
 ypl = [1 J];
 YPL = (1:J)'*[1 1];
+
+% plot the loops
+angles = linspace(0, 2*pi, numcarsmax);
+
+xnpl = radiusn * cos(angles) + centern;
+ynpl = radiusn * sin(angles) + centern;
+
+xzpl = radiusz * cos(angles) + centerz;
+yzpl = radiusz * sin(angles) + centerz;
+
+xwpl = radiusw * cos(angles) + centerw;
+ywpl = radiusw * sin(angles) + centerw;
+
 
 cblocked = zeros(I,J);
 
