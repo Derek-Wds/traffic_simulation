@@ -37,15 +37,15 @@ if radius == radiusz
     lc_zloop(blocknum) = c;
     if mod(radius,2) == 0
         if blocknum - 1 == 0
-            nc(c) = fc_nloop(blockmax);
+            nc(c) = fc_zloop(blockmax);
         else
-            nc(c) = fc_nloop(blocknum-1);
+            nc(c) = fc_zloop(blocknum-1);
         end
     else
         if blocknum + 1 > blockmax
-            nc(c) = fc_nloop(1);
+            nc(c) = fc_zloop(1);
         else
-            nc(c) = fc_nloop(blocknum+1);
+            nc(c) = fc_zloop(blocknum+1);
         end
     end
 end
@@ -59,15 +59,15 @@ if radius == radiusw
     lc_wloop(blocknum) = c;
     if mod(radius,2) == 0
         if blocknum - 1 == 0
-            nc(c) = fc_nloop(blockmax);
+            nc(c) = fc_wloop(blockmax);
         else
-            nc(c) = fc_nloop(blocknum-1);
+            nc(c) = fc_wloop(blocknum-1);
         end
     else
         if blocknum + 1 > blockmax
-            nc(c) = fc_nloop(1);
+            nc(c) = fc_wloop(1);
         else
-            nc(c) = fc_nloop(blocknum+1);
+            nc(c) = fc_wloop(blocknum+1);
         end
     end
 end
