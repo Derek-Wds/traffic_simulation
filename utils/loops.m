@@ -14,9 +14,9 @@ for block = 1:blockmax
     i = 1;
     while i ~= blockmax
         if mod(block + i, blockmax) == 0
-            c_before = lc_wloop(blockmax);
+            c_before = lc_nloop(blockmax);
         else
-            c_before = lc_wloop(mod(block + i, blockmax));
+            c_before = lc_nloop(mod(block + i, blockmax));
         end
         i = i + 1;
         if c_before ~= 0
@@ -47,15 +47,15 @@ for block = 1:blockmax
         fprintf('x(c) %i \n', x(c))
         fprintf('y(c) %i \n', y(c))
         nextc=nc(c);
-        vec_c = [x(c)-centern y(c)-centern 0];
-        vec_cb = [xp-centern yp-centern 0];
-        ddegree = atan2d(norm(cross(vec_c,vec_cb)),dot(vec_c,vec_cb));
-        distance = 2 * pi * radiusn * (ddegree / 360);
-        move_distance = dt*v(distance);
-        fprintf('distance %i \n', distance)
-        fprintf('move distance %i \n', move_distance)
-        ratio = move_distance / distance;
         if(~broken(c))
+            vec_c = [x(c)-centern y(c)-centern 0];
+            vec_cb = [xp-centern yp-centern 0];
+            ddegree = atan2d(norm(cross(vec_c,vec_cb)),dot(vec_c,vec_cb));
+            distance = 2 * pi * radiusn * (ddegree / 360);
+            move_distance = dt*v(distance);
+            fprintf('distance %i \n', distance)
+            fprintf('move distance %i \n', move_distance)
+            ratio = move_distance / distance;
             [theta,rho] = cart2pol(x(c)-centern, y(c)-centern);
             if mod(radiusn, 2) == 0
                 x(c) = cosd(rad2deg(theta)-ddegree*ratio)*radiusn + centern;
@@ -76,9 +76,9 @@ for block = 1:blockmax
     i = 1;
     while i ~= blockmax
         if mod(block + i, blockmax) == 0
-            c_before = lc_wloop(blockmax);
+            c_before = lc_zloop(blockmax);
         else
-            c_before = lc_wloop(mod(block + i, blockmax));
+            c_before = lc_zloop(mod(block + i, blockmax));
         end
         i = i + 1;
         if c_before ~= 0
@@ -109,13 +109,13 @@ for block = 1:blockmax
         % fprintf('x(c) %i \n', x(c))
         % fprintf('y(c) %i \n', y(c))
         nextc=nc(c);
-        vec_c = [x(c)-centerz y(c)-centerz 0];
-        vec_cb = [xp-centerz yp-centerz 0];
-        ddegree = atan2d(norm(cross(vec_c,vec_cb)),dot(vec_c,vec_cb));
-        distance = 2 * pi * radiusz * (ddegree / 360);
-        move_distance = dt*v(distance);
-        ratio = move_distance / distance;
         if(~broken(c))
+            vec_c = [x(c)-centerz y(c)-centerz 0];
+            vec_cb = [xp-centerz yp-centerz 0];
+            ddegree = atan2d(norm(cross(vec_c,vec_cb)),dot(vec_c,vec_cb));
+            distance = 2 * pi * radiusz * (ddegree / 360);
+            move_distance = dt*v(distance);
+            ratio = move_distance / distance;
             [theta,rho] = cart2pol(x(c)-centerz, y(c)-centerz);
             if mod(radiusz, 2) == 0
                 x(c) = cosd(rad2deg(theta)-ddegree*ratio)*radiusz + centerz;
@@ -169,13 +169,13 @@ for block = 1:blockmax
         % fprintf('x(c) %i \n', x(c))
         % fprintf('y(c) %i \n', y(c))
         nextc=nc(c);
-        vec_c = [x(c)-centerw y(c)-centerw 0];
-        vec_cb = [xp-centerw yp-centerw 0];
-        ddegree = atan2d(norm(cross(vec_c,vec_cb)),dot(vec_c,vec_cb));
-        distance = 2 * pi * radiusw * (ddegree / 360);
-        move_distance = dt*v(distance);
-        ratio = move_distance / distance;
         if(~broken(c))
+            vec_c = [x(c)-centerw y(c)-centerw 0];
+            vec_cb = [xp-centerw yp-centerw 0];
+            ddegree = atan2d(norm(cross(vec_c,vec_cb)),dot(vec_c,vec_cb));
+            distance = 2 * pi * radiusw * (ddegree / 360);
+            move_distance = dt*v(distance);
+            ratio = move_distance / distance;
             [theta,rho] = cart2pol(x(c)-centerw, y(c)-centerw);
             if mod(radiusw, 2) == 0
                 x(c) = cosd(rad2deg(theta)-ddegree*ratio)*radiusw + centerw;
