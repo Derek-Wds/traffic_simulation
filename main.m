@@ -29,7 +29,9 @@ while((numcars<numcarsmax)|(numcarsout>0))
   avenues
   unblock             %unblock corners where blocking car has moved
   streets
-  loops               %move cars on the loops
+  loops(centern, radiusn);               %move cars on the nloop
+  loops(centerz, radiusz);               %move cars on the zloop
+  loops(centerw, radiusw);               %move cars on the wloop
   deletecars
   unblock             %unblock corners where blocking car has moved
   set(hcars,'xdata',x(find(onroad)),'ydata',y(find(onroad)))

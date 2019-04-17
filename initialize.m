@@ -7,7 +7,8 @@ global centern radiusn;
 global centerz radiusz;
 global centerw radiusw;
 global lc_nloop fc_nloop lc_zloop fc_zloop lc_wloop fc_wloop;
-global nc;
+global nc dt broken x y xd yd fc lc;
+
 
 I = 22;                         %number of avenues (must be even)
 J = 22;                         %number of streets (must be even)
