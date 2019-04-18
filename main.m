@@ -40,8 +40,7 @@ while((numcars<numcarsmax)|(numcarsout>0))
   set(hcars_wloops,'xdata', x(find(on_wloop)),'ydata', y(find(on_wloop)))
   [ib,jb,cb]=find(cblocked);
   set(hcblocked,'xdata',x(cb),'ydata',y(cb))
-  set(hbcars,'xdata',x(find(onroad&broken)),'ydata',y(find(onroad& ...
-						  broken)))
+  set(hbcars,'xdata',x(find(onroad&broken)),'ydata',y(find(onroad&broken)))
   drawnow
 
 end

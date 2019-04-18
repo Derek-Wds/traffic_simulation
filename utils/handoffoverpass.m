@@ -1,4 +1,4 @@
-function handoffoverpass(c, blocknum, radius)
+function [fc_loop, lc_loop] = handoffoverpass(c, blocknum, radius)
 global radiusn
 global radiusz
 global radiusw
@@ -7,67 +7,32 @@ global nc;
 global blockmax;
 
 if radius == radiusn
-    if lc_nloop(blocknum) ~= 0
-        nc(lc_nloop(blocknum)) = c;
-    else
-        fc_nloop(blocknum) = c;
-    end
-    lc_nloop(blocknum) = c;
-    if mod(radius,2) == 0
-        if blocknum - 1 == 0
-            nc(c) = fc_nloop(blockmax);
-        else
-            nc(c) = fc_nloop(blocknum-1);
-        end
-    else
-        if blocknum + 1 > blockmax
-            nc(c) = fc_nloop(1);
-        else
-            nc(c) = fc_nloop(blocknum+1);
-        end
-    end
-end   
-
-if radius == radiusz
-    if lc_zloop(blocknum) ~= 0
-        nc(lc_zloop(blocknum)) = c;
-    else
-        fc_zloop(blocknum) = c;
-    end
-    lc_zloop(blocknum) = c;
-    if mod(radius,2) == 0
-        if blocknum - 1 == 0
-            nc(c) = fc_zloop(blockmax);
-        else
-            nc(c) = fc_zloop(blocknum-1);
-        end
-    else
-        if blocknum + 1 > blockmax
-            nc(c) = fc_zloop(1);
-        else
-            nc(c) = fc_zloop(blocknum+1);
-        end
-    end
+    fc_loop = fc_nloop;
+    lc_loop = lc_nloop;
+elseif radius == radiusz
+    fc_loop = fc_zloop;
+    lc_loop = lc_zloop;
+else
+    fc_loop = fc_wloop;
+    lc_loop = lc_wloop;
 end
 
-if radius == radiusw
-    if lc_wloop(blocknum) ~= 0
-        nc(lc_wloop(blocknum)) = c;
+if lc_loop(blocknum) ~= 0
+    nc(lc_loop(blocknum)) = c;
+else
+    fc_loop(blocknum) = c;
+end
+lc_loop(blocknum) = c;
+if mod(radius,2) == 0
+    if blocknum - 1 == 0
+        nc(c) = fc_loop(blockmax);
     else
-        fc_wloop(blocknum) = c;
+        nc(c) = fc_loop(blocknum-1);
     end
-    lc_wloop(blocknum) = c;
-    if mod(radius,2) == 0
-        if blocknum - 1 == 0
-            nc(c) = fc_wloop(blockmax);
-        else
-            nc(c) = fc_wloop(blocknum-1);
-        end
+else
+    if blocknum + 1 > blockmax
+        nc(c) = fc_loop(1);
     else
-        if blocknum + 1 > blockmax
-            nc(c) = fc_wloop(1);
-        else
-            nc(c) = fc_wloop(blocknum+1);
-        end
+        nc(c) = fc_loop(blocknum+1);
     end
 end

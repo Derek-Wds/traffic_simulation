@@ -3,6 +3,7 @@ global blockmax;
 global radiusn;
 global radiusz;
 global radiusw;
+global on_nloop on_zloop on_wloop onroad;
 
 onroad(c) = 0;
 xpos = x - center;

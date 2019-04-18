@@ -7,6 +7,7 @@ global centern radiusn;
 global centerz radiusz;
 global centerw radiusw;
 global lc_nloop fc_nloop lc_zloop fc_zloop lc_wloop fc_wloop;
+global on_nloop on_zloop on_wloop onroad;
 global nc dt broken x y xd yd fc lc;
 
 

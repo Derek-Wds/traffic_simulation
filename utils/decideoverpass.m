@@ -6,7 +6,7 @@ dist = sqrt((x - xd)^2 + (y - yd)^2);
 % decide clockwise or counter-clockwise 
 if mod(radius, 2) == 0
     if (x  > center)
-        x_test = x + 0.05;
+        x_test = x + 0.5;
         if y > center
             y_test = y - sqrt(radius^2 - (center - x_test)^2);
         else
@@ -17,7 +17,7 @@ if mod(radius, 2) == 0
             change = 1;
         end
     else
-        x_test = x + 0.05;
+        x_test = x + 0.5;
         if y > center
             y_test = y + sqrt(radius^2 - (center - x_test)^2);
         else
@@ -30,7 +30,7 @@ if mod(radius, 2) == 0
     end
 else
     if (x  > center)
-        x_test = x - 0.05;
+        x_test = x - 0.5;
         if y > center
             y_test = y + sqrt(radius^2 - (center - x_test)^2);
         else
@@ -41,7 +41,7 @@ else
             change = 1;
         end
     else
-        x_test = x - 0.05;
+        x_test = x - 0.5;
         if y > center
             y_test = y - sqrt(radius^2 - (center - x_test)^2);
         else

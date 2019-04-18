@@ -26,86 +26,11 @@ for j=1:J                                     %all streets
 
       % check if move to the loop
       if (abs(sqrt((x(c) - centern)^2 + (y(c) - centern)^2) - radiusn) <= 0.01)
-          change = decideoverpass(x(c),y(c),xd(c),yd(c),centern,radiusn);
-          if change == 1 && rand <= 0.5 && x(c) ~= 0 && y(c) ~= 0
-              blocknum = tooverpass(c,x(c),y(c),centern,radiusn);
-              handoffoverpass(c, blocknum, radiusn)
-              if c ~= fc(i,j,as)
-                nc(beforec) = nextc;
-              else
-                fc(i,j,as) = nextc;
-              end     
-              if(nextc==0)
-                if fc(i,j,as) ~= 0
-                  lc(i,j,as) = beforec;
-                else                  
-                  lc(i,j,as)=0;
-                end                  
-              end
-          else
-              if(~broken(c))                          %car not broken?
-                x(c)=x(c)+sign*dt*v(sign*(xpc-x(c)));   %move car c
-              end
-              if((x(c)*sign)>(i*sign))                
-                [inew,jnew,asnew]=decide(i,j,xd(c),yd(c)); 
-                handoff                                    
-              end
-              xpc=x(c);
-          end
+          overpass(c, nextc, beforec, i, j, centern, radiusn, sign, xpc, as);
       elseif (abs(sqrt((x(c) - centerz)^2 + (y(c) - centerz)^2) - radiusz) <= 0.01)
-          change = decideoverpass(x(c),y(c),xd(c),yd(c),centerz,radiusz);
-          if change == 1 && rand <= 0.5 && x(c) ~= 0 && y(c) ~= 0
-              blocknum = tooverpass(c,x(c),y(c),centerz,radiusz);
-              handoffoverpass(c, blocknum, radiusz)
-              if c ~= fc(i,j,as)
-                nc(beforec) = nextc;
-              else
-                fc(i,j,as) = nextc;
-              end       
-              if(nextc==0)                      
-                if fc(i,j,as) ~= 0
-                  lc(i,j,as) = beforec;
-                else                  
-                  lc(i,j,as)=0;
-                end            
-              end
-          else
-              if(~broken(c))                          %car not broken?
-                x(c)=x(c)+sign*dt*v(sign*(xpc-x(c)));   %move car c
-              end
-              if((x(c)*sign)>(i*sign))                
-                [inew,jnew,asnew]=decide(i,j,xd(c),yd(c)); 
-                handoff                                    
-              end
-              xpc=x(c);
-          end
+          overpass(c, nextc, beforec, i, j, centerz, radiusz, sign, xpc, as);
       elseif (abs(sqrt((x(c) - centerw)^2 + (y(c) - centerw)^2) - radiusw) <= 0.01)
-          change = decideoverpass(x(c),y(c),xd(c),yd(c),centerw,radiusw);
-          if change == 1 && rand <= 0.5 && x(c) ~= 0 && y(c) ~= 0
-              blocknum = tooverpass(c,x(c),y(c),centerw,radiusw);
-              handoffoverpass(c, blocknum, radiusw)
-              if c ~= fc(i,j,as)
-                nc(beforec) = nextc;
-              else
-                fc(i,j,as) = nextc;
-              end      
-              if(nextc==0)                      
-                if fc(i,j,as) ~= 0
-                  lc(i,j,as) = beforec;
-                else                  
-                  lc(i,j,as)=0;
-                end              
-              end
-          else
-              if(~broken(c))                          %car not broken?
-                x(c)=x(c)+sign*dt*v(sign*(xpc-x(c)));   %move car c
-              end
-              if((x(c)*sign)>(i*sign)) xpc=x(c);               
-                [inew,jnew,asnew]=decide(i,j,xd(c),yd(c)); 
-                handoff                                    
-              end
-              xpc=x(c);
-          end
+          overpass(c, nextc, beforec, i, j, centerw, radiusw, sign, xpc, as);
       else
           if(~broken(c))                          %car not broken?
             x(c)=x(c)+sign*dt*v(sign*(xpc-x(c)));   %move car c
