@@ -34,6 +34,8 @@ elseif((j==J)&(even(i)))
   jnew=J;
   inew=i-1;
 
+
+
 %Now consider typical cases, in which there are two choices:
 
 else
@@ -41,17 +43,23 @@ else
   signj=odd(j)-even(j); %direction of traffic flow on street j
   s=(xd-i)*signj;       %s=u.us
   a=(yd-j)*signi;       %a=u.ua
-  if(a>s)               %u.us > u.ua ?
-    asnew=1;             %choose avenue
-    inew=i;              %avenue remains that of corner where choice was made
-    jnew=j+signi;        %street index of next light will be 
-                         %current street index +-1, depending on the
-                         %direction of traffic flow on the avenue (signi)
+  if i < 9 & i > 13
+      if(a>s)               %u.us > u.ua ?
+        asnew=1;             %choose avenue
+        inew=i;              %avenue remains that of corner where choice was made
+        jnew=j+signi;        %street index of next light will be 
+                             %current street index +-1, depending on the
+                             %direction of traffic flow on the avenue (signi)
+      else
+        asnew=2;             %choose street
+        jnew=j;              %street remains that of corner where choice was made
+        inew=i+signj;        %avenue index of next light will be
+                             %current avenue index +-1, depending on the
+                             %direction of traffic flow on the street (signj)
+      end
   else
-    asnew=2;             %choose street
-    jnew=j;              %street remains that of corner where choice was made
-    inew=i+signj;        %avenue index of next light will be
-                         %current avenue index +-1, depending on the
-                         %direction of traffic flow on the street (signj)
+      asnew=2;
+      jnew=j;
+      inew=i+signj;
   end
 end
