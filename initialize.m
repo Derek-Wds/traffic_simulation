@@ -28,7 +28,7 @@ dmax = .5;                      %distance above which v=vmax (in units of blocks
 vmax = 1;                       %maximum speed of cars (since the unit of time 
                                 %is the time it takes a car to go one block 
                                 %at maximum speed)
-numcarsmax = 1000;              %maximum number of cars       
+numcarsmax = 100;              %maximum number of cars       
 TLP = 3;                        %period of the traffic light cycle
 TLA = 2;                        %duration of green on avenues in each cycle
 

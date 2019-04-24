@@ -43,7 +43,7 @@ else
   signj=odd(j)-even(j); %direction of traffic flow on street j
   s=(xd-i)*signj;       %s=u.us
   a=(yd-j)*signi;       %a=u.ua
-  if i < 9 & i > 13
+  if i < 9 | i > 13
       if(a>s)               %u.us > u.ua ?
         asnew=1;             %choose avenue
         inew=i;              %avenue remains that of corner where choice was made
