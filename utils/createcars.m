@@ -13,7 +13,7 @@ for j=2:(J-1)                                  %interior streets
   for i=(2:I)*odd(j)+(1:(I-1))*even(j)         %all blocks on street
   % all x should be out of 9-13 for not create at tunnels
   % i is the block end; no use between 9 and 13.
-  %  if (i < 9) & (i > 13)
+   if (i < 9) | (i > 13)
         if(rand<pcreate*dt)                        %create car in block?
           numcars=numcars+1;                       %update total number of cars
           if(numcars==numcarsmax)                  %is this car the last?
@@ -23,11 +23,8 @@ for j=2:(J-1)                                  %interior streets
           y(numcars)=j;                            %origin (y)
           xd(numcars)=xdmin+(xdmax-xdmin)*rand;              %destination (x)
           yd(numcars)=jdmin+floor(rand*(jdmax+1-jdmin));     %destination (y)
-          if i > 9 & i < 13
-              x(numcars) = x(numcars)-4;
-          end
-          if xd(numcars) > 9 & xd(numcars) < 13
-              xd(numcars) = xd(numcars)-4;
+          if xd(numcars) > 8 & xd(numcars) < 14
+              xd(numcars) = xd(numcars)+6;
           end
           onroad(numcars)=1;                       %mark car as out on road
           numcarsout=numcarsout+1;                 %increment number of cars out
@@ -63,7 +60,7 @@ for j=2:(J-1)                                  %interior streets
             end
           end
         end
-    %end
+    end
   end
 end
 
