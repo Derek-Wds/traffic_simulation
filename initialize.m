@@ -8,7 +8,7 @@ global centerz radiusz;
 global centerw radiusw;
 global lc_nloop fc_nloop lc_zloop fc_zloop lc_wloop fc_wloop;
 global on_nloop on_zloop on_wloop onroad;
-global nc dt broken x y xd yd fc lc;
+global nc dt broken x y xd yd fc lc pchangepath;
 
 
 I = 22;                         %number of avenues (must be even)
@@ -19,6 +19,7 @@ centerz = 11;                   %center for middle loop
 radiusz = 6;                    %radius for middle loop
 centerw = 11;                   %center for outter loop
 radiusw = 9;                    %radius for outter loop
+pchangepath = 0.3;
 pcreate = 0.3;                  %creation rate per block per unit time
 pbreakdown = 0.01 ;             %breakdown rate per car per unit time
 pfix = 0.1;                     %repair rate per broken car per unit time

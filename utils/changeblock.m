@@ -41,14 +41,6 @@ if blocknum
         end
     end
     if nextblock
-        % if radius == radiusz
-        %     fprintf('block %i \n', blocknum);
-        %     fprintf('nextblock %i \n', nextblock);
-        %     fprintf('position %i %i \n', x(c), y(c));
-        %     fprintf('\n');
-        %     fprintf('\n');
-        %     % error('stop!')
-        % end
         if fc_loop(nextblock) == 0
             fc_loop(nextblock) = c;
         else

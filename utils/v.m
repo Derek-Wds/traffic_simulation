@@ -1,4 +1,4 @@
-function vv=v(d)
+function vv = v(d)
 global dmin dmax v0 vmax;
 if(d < dmin)
   vv = 0;

@@ -36,12 +36,12 @@ if change == 1 && rand <= pchangepath && x(c) ~= 0 && y(c) ~= 0
     end
 else
     if(~broken(c))                          %car not broken?
-        x(c)=x(c)+sign*dt*v(sign*(xpc-x(c)));   %move car c
+        x(c) = x(c) + sign * dt * v(sign * (xpc - x(c)));   %move car c
     end
-    if((x(c)*sign)>(i*sign))                
-        [inew,jnew,asnew]=decide(i,j,xd(c),yd(c)); 
+    if((x(c) * sign) > (i * sign))                
+        [inew, jnew, asnew] = decide(i, j, xd(c), yd(c)); 
         handoff                                 
         turn = 0;   
     end
-    xpc=x(c);
+    xpc = x(c);
 end

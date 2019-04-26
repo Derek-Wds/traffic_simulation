@@ -1,4 +1,4 @@
-function [inew,jnew,asnew]=decide(i,j,xd,yd)
+function [inew,jnew,asnew] = decide(i,j,xd,yd)
 global I J;
 
 %Given a car at corner (i,j) with destination (xd,yd),
@@ -17,49 +17,49 @@ global I J;
 %(but note that corners of the grid will take care of themselves,
 % since the destination is within the grid):
 
-if((i==1)&(even(j)))
-  asnew=1;
-  inew=1;
-  jnew=j-1;
-elseif((i==I)&(odd(j)))
-  asnew=1;
-  inew=I;
-  jnew=j+1;
-elseif((j==1)&(odd(i)))
-  asnew=2;
-  jnew=1;
-  inew=i+1;
-elseif((j==J)&(even(i)))
-  asnew=2;
-  jnew=J;
-  inew=i-1;
+if((i == 1) & (even(j)))
+  asnew = 1;
+  inew = 1;
+  jnew = j - 1;
+elseif((i == I) & (odd(j)))
+  asnew = 1;
+  inew = I;
+  jnew = j + 1;
+elseif((j == 1) & (odd(i)))
+  asnew = 2;
+  jnew = 1;
+  inew = i + 1;
+elseif((j==J) & (even(i)))
+  asnew = 2;
+  jnew = J;
+  inew = i - 1;
 
 
 
 %Now consider typical cases, in which there are two choices:
 
 else
-  signi=even(i)-odd(i); %direction of traffic flow on avenue i
-  signj=odd(j)-even(j); %direction of traffic flow on street j
-  s=(xd-i)*signj;       %s=u.us
-  a=(yd-j)*signi;       %a=u.ua
+  signi=even(i) - odd(i); %direction of traffic flow on avenue i
+  signj=odd(j) - even(j); %direction of traffic flow on street j
+  s=(xd-i) * signj;       %s=u.us
+  a=(yd-j) * signi;       %a=u.ua
   if i < 9 | i > 13
-      if(a>s)               %u.us > u.ua ?
-        asnew=1;             %choose avenue
-        inew=i;              %avenue remains that of corner where choice was made
-        jnew=j+signi;        %street index of next light will be 
+      if(a > s)               %u.us > u.ua ?
+        asnew = 1;             %choose avenue
+        inew = i;              %avenue remains that of corner where choice was made
+        jnew = j + signi;        %street index of next light will be 
                              %current street index +-1, depending on the
                              %direction of traffic flow on the avenue (signi)
       else
-        asnew=2;             %choose street
-        jnew=j;              %street remains that of corner where choice was made
-        inew=i+signj;        %avenue index of next light will be
+        asnew = 2;             %choose street
+        jnew = j;              %street remains that of corner where choice was made
+        inew = i + signj;        %avenue index of next light will be
                              %current avenue index +-1, depending on the
                              %direction of traffic flow on the street (signj)
       end
   else
-      asnew=2;
-      jnew=j;
-      inew=i+signj;
+      asnew = 2;
+      jnew = j;
+      inew = i + signj;
   end
 end

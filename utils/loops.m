@@ -62,16 +62,9 @@ for blocknum = 1:blockmax
         nextc=nc(c);
         car_before = find(nc==c);
         if car_before
-            % disp('car_before')
-            % disp(car_before)
-            % fprintf('car before position %i %i ',x(car_before), y(car_before))
             xp = x(car_before);
             yp = y(car_before);
         else
-            % if radius == radiusz
-            %     disp('works!')
-            %     fprintf('old position %i %i \n', x(c), y(c));
-            % end
             car_before = 0;
             r = rand;
             if r < 0.25
@@ -103,43 +96,7 @@ for blocknum = 1:blockmax
                 x(c) = cosd(rad2deg(theta)+ddegree*ratio)*radius + center;
                 y(c) = sind(rad2deg(theta)+ddegree*ratio)*radius + center;
             end
-            % if radius == radiusz
-            %     fprintf('nloop vecc %i %i %i \n', vec_c)
-            %     fprintf('nloop veccb %i %i %i \n', vec_cb)
-            %     fprintf('ddegree %i\n', ddegree)
-            %     fprintf('distance %i \n', distance)
-            %     fprintf('move distance %i \n', move_distance)
-            %     fprintf('theta %i, rho %i\n', theta, rho)
-            %     fprintf('new position %i %i \n', x(c), y(c));
-            % end
         end
-        
-        % if on_loop(c) == 1 & radius == radiusw
-        %     disp('cc:\n')
-        %     disp(c)
-        %     disp('on loop')
-        %     disp(on_loop(c))
-        %     if radius == radiusn
-        %         disp('nloop')
-        %     elseif radius == radiusz
-        %         disp('zloop')
-        %     else
-        %         disp('wloop')
-        %     end
-        %     fprintf('car position %i %i', x(c), y(c))
-        %     if car_before
-        %         disp('car before:\n')
-        %         disp(car_before)
-        %         disp('car before on loop:\n')
-        %         disp(on_loop(car_before))
-        %     end
-        %     disp('block number\n')
-        %     disp(blocknum)
-        %     disp('fc_loop block\n')
-        %     disp(fc_loop(blocknum))
-        %     disp('lc_loop block\n')
-        %     disp(lc_loop(blocknum))
-        % end
 
         % check if car should be off the overpass and to road
         offoverpass = 0;
@@ -157,11 +114,10 @@ for blocknum = 1:blockmax
                 lc_loop(blocknum) = 0;
             end
 
-        % else
-        %     xp = x(c);
-        %     yp = y(c);
+        else
+            xp = x(c);
+            yp = y(c);
         end
-
 
         % change block for different cars
         [fc_loop, lc_loop] = changeblock(center, radius, c, nextc, fc_loop, lc_loop);

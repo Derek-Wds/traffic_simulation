@@ -1,7 +1,7 @@
-as=2;                                         %consider cars on streets
-for j=1:J                                     %all streets
-  sign=odd(j)-even(j);                        %direction of traffic flow
-  for i=((I:(-1):2)*odd(j)+(1:(I-1))*even(j)) %blocks on street j
+as = 2;                                         %consider cars on streets
+for j = 1:J                                     %all streets
+  sign = odd(j) - even(j);                        %direction of traffic flow
+  for i = ((I:(-1):2) * odd(j) + (1:(I-1)) * even(j)) %blocks on street j
     
     %xpc = x-coordinate of the car ahead of the first car on the block.
     %If the block ahead is empty, or if there is no such block,
@@ -9,19 +9,19 @@ for j=1:J                                     %all streets
     %so the first car can proceed at maximum speed.
     %If the traffic light is red, however, it is treated as the car ahead,
     %so xpc is set equal to the x-coordinate of the (red) light.
-    if((L(i,j,as)==0)|cblocked(i,j))     %red light (or blocked intersection)?
-      xpc=i;                                   %"previous car" = traffic light
-    elseif((1<i)&(i<I))                       %interior block?
-      if(lc(i+sign,j,as)~=0)                    %next block not empty?
-        xpc=x(lc(i+sign,j,as));                  %previous car is 
+    if((L(i,j,as) == 0) | cblocked(i,j))     %red light (or blocked intersection)?
+      xpc = i;                                   %"previous car" = traffic light
+    elseif((1 < i) & (i < I))                       %interior block?
+      if(lc(i + sign, j, as) ~= 0)                    %next block not empty?
+        xpc=x(lc(i + sign, j, as));                  %previous car is 
       end                                       %the last car on next block
     else                                      %otherwise
-      xpc=i+sign*dmax;                         %first car can proceed
+      xpc = i + sign * dmax;                         %first car can proceed
     end                                        %at maximum speed
 
-    c=fc(i,j,as);                            %c=first car on block
-    while(c~=0)                              %consider all cars on block
-      nextc=nc(c);                            %note next car
+    c=fc(i, j, as);                            %c=first car on block
+    while(c ~= 0)                              %consider all cars on block
+      nextc = nc(c);                            %note next car
       turn = 0;
       % check if move to the loop
       if (abs(sqrt((x(c) - centern)^2 + (y(c) - centern)^2) - radiusn) <= 0.01)
@@ -32,14 +32,14 @@ for j=1:J                                     %all streets
           overpass(c, nextc, i, j, centerw, radiusw, sign, xpc, as, turn);
       else
           if(~broken(c))                          %car not broken?
-            x(c)=x(c)+sign*dt*v(sign*(xpc-x(c)));   %move car c
+            x(c) = x(c) + sign * dt * v(sign * (xpc - x(c)));   %move car c
           end
-          if((x(c)*sign)>(i*sign))                %reached the corner?
-            [inew,jnew,asnew]=decide(i,j,xd(c),yd(c)); %decide which way to go
+          if((x(c) * sign) > (i * sign))                %reached the corner?
+            [inew, jnew, asnew] = decide(i, j, xd(c), yd(c)); %decide which way to go
             handoff                                    %handoff to next block
             turn = 1;
           end
-          xpc=x(c);                               %current car becomes
+          xpc = x(c);                               %current car becomes
       end
       
       c=nextc;                                %previous car
