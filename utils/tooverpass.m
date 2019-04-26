@@ -1,4 +1,4 @@
-function blocknum=tooverpass(c,x,y,center,radius)
+function [on_loop, blocknum]=tooverpass(c,x,y,center,radius)
 global blockmax;
 global radiusn;
 global radiusz;
@@ -25,11 +25,11 @@ for pos = 1:blockmax
         if ypos > 0
             blocknum = pos;
         else
-            blocknum = blockmax/2 - pos;
+            blocknum = blockmax/2 - pos + 1;
         end
     elseif xpos < 0 && xrange <= xpos
         if ypos > 0
-            blocknum = 3 * (blockmax/2) - pos;
+            blocknum = 3 * (blockmax/2) - pos + 1;
         else
             blocknum = pos;
         end
@@ -38,9 +38,12 @@ end
 
 if radius == radiusn
     on_nloop(c) = 1;
+    on_loop = on_nloop;
 elseif radius == radiusz
     on_zloop(c) = 1;
+    on_loop = on_zloop;
 elseif radius == radiusw
     on_wloop(c) = 1;
+    on_loop = on_wloop;
 end
 

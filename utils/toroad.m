@@ -6,7 +6,7 @@ ave_dis_high = ceil(x(c));
 % check which street or avenue that is closest to the car
 if x(c) < 9 | x(c) > 13
     if abs(y(c) - street_dis_low) < 0.01
-        if rand < 0.2
+        if rand < pchangepath | abs(x(c) - xd(c)) < 0.5 | abs(y(c) - yd(c)) < 0.5
             h = street_dis_low;
             direction = odd(h)-even(h); 
             if direction > 0
@@ -56,7 +56,7 @@ if x(c) < 9 | x(c) > 13
             end     
         end
     elseif abs(street_dis_high - y(c)) < 0.01
-        if rand < 0.2
+        if rand < pchangepath | abs(x(c) - xd(c)) < 0.5 | abs(y(c) - yd(c)) < 0.5
             h = street_dis_high;
             direction = odd(h)-even(h); 
             if direction > 0
@@ -106,7 +106,7 @@ if x(c) < 9 | x(c) > 13
             end
         end
     elseif abs(x(c) - ave_dis_low) < 0.01
-        if rand < 0.2
+        if rand < pchangepath | abs(x(c) - xd(c)) < 0.5 | abs(y(c) - yd(c)) < 0.5
             z = ave_dis_low;
             direction = even(z) - odd(z); 
             if direction > 0
@@ -156,7 +156,7 @@ if x(c) < 9 | x(c) > 13
             end
         end
     elseif abs(ave_dis_high - x(c)) < 0.01
-        if rand < 0.2
+        if rand < pchangepath | abs(x(c) - xd(c)) < 0.5 | abs(y(c) - yd(c)) < 0.5
             z = ave_dis_high;
             direction = even(z) - odd(z); 
             if direction > 0

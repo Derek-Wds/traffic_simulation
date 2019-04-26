@@ -20,17 +20,16 @@ for j=1:J                                     %all streets
     end                                        %at maximum speed
 
     c=fc(i,j,as);                            %c=first car on block
-    beforec = c;
     while(c~=0)                              %consider all cars on block
       nextc=nc(c);                            %note next car
-
+      turn = 0;
       % check if move to the loop
       if (abs(sqrt((x(c) - centern)^2 + (y(c) - centern)^2) - radiusn) <= 0.01)
-          overpass(c, nextc, beforec, i, j, centern, radiusn, sign, xpc, as);
+          overpass(c, nextc, i, j, centern, radiusn, sign, xpc, as, turn);
       elseif (abs(sqrt((x(c) - centerz)^2 + (y(c) - centerz)^2) - radiusz) <= 0.01)
-          overpass(c, nextc, beforec, i, j, centerz, radiusz, sign, xpc, as);
+          overpass(c, nextc, i, j, centerz, radiusz, sign, xpc, as, turn);
       elseif (abs(sqrt((x(c) - centerw)^2 + (y(c) - centerw)^2) - radiusw) <= 0.01)
-          overpass(c, nextc, beforec, i, j, centerw, radiusw, sign, xpc, as);
+          overpass(c, nextc, i, j, centerw, radiusw, sign, xpc, as, turn);
       else
           if(~broken(c))                          %car not broken?
             x(c)=x(c)+sign*dt*v(sign*(xpc-x(c)));   %move car c
@@ -38,15 +37,11 @@ for j=1:J                                     %all streets
           if((x(c)*sign)>(i*sign))                %reached the corner?
             [inew,jnew,asnew]=decide(i,j,xd(c),yd(c)); %decide which way to go
             handoff                                    %handoff to next block
+            turn = 1;
           end
           xpc=x(c);                               %current car becomes
       end
       
-      if onroad(c) == 0
-        beforec = nextc;
-      else
-        beforec = c;
-      end
       c=nextc;                                %previous car
     end
   end
