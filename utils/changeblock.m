@@ -13,19 +13,11 @@ nextblock = 0;
 % check if should move to next block
 if blocknum
     if blocknum <= blockmax / 2
-        if mod(radius, 2) == 0
-            pointer = [0 radius 0];
-        else
-            pointer = [0 -radius 0];
-        end
+        pointer = [0 radius 0];
         rel_vec = [x(c)-center y(c)-center 0];
         degree = atan2d(norm(cross(pointer,rel_vec)),dot(pointer,rel_vec));
     else
-        if mod(radius, 2) == 0
-            pointer = [0 -radius 0];
-        else
-            pointer = [0 radius 0];
-        end
+        pointer = [0 -radius 0];
         rel_vec = [x(c)-center y(c)-center 0];
         degree = atan2d(norm(cross(pointer,rel_vec)),dot(pointer,rel_vec)) + 180;
     end
@@ -49,7 +41,14 @@ if blocknum
         end
     end
     if nextblock
-        % fprintf('nextblock %i \n', nextblock);
+        % if radius == radiusz
+        %     fprintf('block %i \n', blocknum);
+        %     fprintf('nextblock %i \n', nextblock);
+        %     fprintf('position %i %i \n', x(c), y(c));
+        %     fprintf('\n');
+        %     fprintf('\n');
+        %     % error('stop!')
+        % end
         if fc_loop(nextblock) == 0
             fc_loop(nextblock) = c;
         else
