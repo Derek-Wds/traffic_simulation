@@ -88,13 +88,13 @@ for blocknum = 1:blockmax
             distance = 2 * pi * radius * (ddegree / 360);
             move_distance = dt * v(distance);
             ratio = move_distance / distance;
-            [theta,rho] = cart2pol(x(c)-center, y(c)-center);
+            [theta,rho] = cart2pol(x(c) - center, y(c) - center);
             if mod(radius, 2) == 0
-                x(c) = cosd(rad2deg(theta)-ddegree*ratio)*radius + center;
-                y(c) = sind(rad2deg(theta)-ddegree*ratio)*radius + center;
+                x(c) = cosd(rad2deg(theta) - ddegree*ratio) * radius + center;
+                y(c) = sind(rad2deg(theta) - ddegree*ratio) * radius + center;
             else
-                x(c) = cosd(rad2deg(theta)+ddegree*ratio)*radius + center;
-                y(c) = sind(rad2deg(theta)+ddegree*ratio)*radius + center;
+                x(c) = cosd(rad2deg(theta) + ddegree*ratio) * radius + center;
+                y(c) = sind(rad2deg(theta) + ddegree*ratio) * radius + center;
             end
         end
 
