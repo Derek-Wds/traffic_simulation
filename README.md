@@ -7,5 +7,5 @@
 * There has certain rate of break down and recover of each car. The red dot in the gif following shows the broken cars.
 * There have traffic lights on the grid system but not on the ring road.
 * Run the `main.m` file in matlab to start the program.
-* Here is the gif of result.
+
 ![](https://i.imgur.com/ssgiqR4.gif)
