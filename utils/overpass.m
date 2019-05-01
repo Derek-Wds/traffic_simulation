@@ -8,6 +8,7 @@ global lc_nloop fc_nloop lc_zloop fc_zloop lc_wloop fc_wloop on_nloop on_zloop o
 change = decideoverpass(x(c),y(c),xd(c),yd(c),center,radius);
 if change == 1 && rand <= pchangepath && x(c) ~= 0 && y(c) ~= 0
     car_before = find(nc==c);
+    disp(car_before)
     nc(car_before) = nextc;
     [on_loop, blocknum] = tooverpass(c,x(c),y(c),center,radius);
     [fc_loop, lc_loop] = handoffoverpass(c, blocknum, radius);

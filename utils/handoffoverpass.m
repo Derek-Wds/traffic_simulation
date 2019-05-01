@@ -17,24 +17,28 @@ else
     lc_loop = lc_wloop;
 end
 
-if lc_loop(blocknum) ~= 0
-    nc(lc_loop(blocknum)) = c;
-else
+if fc_loop(blocknum) == 0
     fc_loop(blocknum) = c;
+    lc_loop(blocknum) = c;
+    nc(c) = 0;
+elseif getcarpos(c, fc_loop(blocknum), radius, blocknum) == 1
+    nc(c) = fc_loop(blocknum);
+    fc_loop(blocknum) = c;
+elseif getcarpos(lc_loop(blocknum), c, radius, blocknum) == 1
+    nc(lc_loop(blocknum)) = c;
+    lc_loop(blocknum) = c;
+    nc(c) = 0;
+else
+    pc = fc_loop(blocknum);
+    cc = nc(pc);
+    while cc ~= 0
+        if getcarpos(c, cc, radius, blocknum) == 1
+            nc(pc) = c;
+            nc(c) = cc;
+            break
+        else
+            pc = cc;
+            cc = nc(cc);
+        end
+    end
 end
-lc_loop(blocknum) = c;
-nc(c) = 0;
-
-% if mod(radius,2) == 0
-%     if blocknum - 1 == 0
-%         nc(c) = fc_loop(blockmax);
-%     else
-%         nc(c) = fc_loop(blocknum-1);
-%     end
-% else
-%     if blocknum + 1 > blockmax
-%         nc(c) = fc_loop(1);
-%     else
-%         nc(c) = fc_loop(blocknum+1);
-%     end
-% end

@@ -44,7 +44,9 @@ if blocknum
         if fc_loop(nextblock) == 0
             fc_loop(nextblock) = c;
         else
-            nc(lc_loop(nextblock)) = c;
+            if lc_loop(nextblock) ~= 0
+                nc(lc_loop(nextblock)) = c;
+            end
         end
         lc_loop(nextblock) = c;
         nc(c) = 0;
